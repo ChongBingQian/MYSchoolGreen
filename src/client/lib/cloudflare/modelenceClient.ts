@@ -1,4 +1,4 @@
-import { ReactNode, useSyncExternalStore } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 
 type SessionUser = {
@@ -129,7 +129,9 @@ export function getConfig(path: string): unknown {
 
 export async function loginWithPassword(input: LoginInput): Promise<SessionUser> {
   const users = readUsers();
-  const match = users.find((user) => user.email === input.email && user.password === input.password);
+  const match = users.find(
+    (user) => user.email === input.email && user.password === input.password
+  );
   if (!match) {
     throw new Error('Invalid email or password');
   }
@@ -165,15 +167,21 @@ export async function logout(): Promise<void> {
 }
 
 export function useSession() {
-  const user = useSyncExternalStore(
-    (onStoreChange) => {
-      const handler = () => onStoreChange();
-      window.addEventListener(SESSION_EVENT, handler);
-      return () => window.removeEventListener(SESSION_EVENT, handler);
-    },
-    () => ({ user: readSession() }),
-    () => ({ user: null })
-  );
+  const [user, setUser] = useState<SessionUser | null>(() => readSession());
 
-  return user;
+  useEffect(() => {
+    const syncSession = () => {
+      setUser(readSession());
+    };
+
+    window.addEventListener(SESSION_EVENT, syncSession);
+    window.addEventListener('storage', syncSession);
+
+    return () => {
+      window.removeEventListener(SESSION_EVENT, syncSession);
+      window.removeEventListener('storage', syncSession);
+    };
+  }, []);
+
+  return { user };
 }
