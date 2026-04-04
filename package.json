@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "deploy": "npm run deploy:cloudflare",
-    "deploy:pages": "npm run build && wrangler pages deploy dist --project-name myschoolgreen",
+    "deploy:pages": "npm run build && cp src/client/public/_redirects.pages dist/_redirects && wrangler pages deploy dist --project-name myschoolgreen",
     "deploy:worker": "npm run build && rm -f dist/_redirects && wrangler deploy --config wrangler.worker.toml",
     "deploy:cloudflare": "npm run deploy:pages && npm run deploy:worker",
     "start": "vite preview",
