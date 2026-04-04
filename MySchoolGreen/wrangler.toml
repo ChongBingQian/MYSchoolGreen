@@ -5,5 +5,5 @@ compatibility_date = "2026-04-04"
 command = "npm install && npm run build"
 
 [assets]
-directory = ".modelence/build/client"
+directory = "dist"
 not_found_handling = "single-page-application"

@@ -312,7 +312,8 @@ export default function DevicesPage() {
                 <CardContent>
                   {!devices || devices.length === 0 ? (
                     <p className="text-gray-500 text-center py-8">
-                      No devices registered yet. Click "Register Device" to add your first sensor.
+                      No devices registered yet. Click &quot;Register Device&quot; to add your first
+                      sensor.
                     </p>
                   ) : (
                     <div className="space-y-4">

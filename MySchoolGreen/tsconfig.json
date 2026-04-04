@@ -1,8 +1,11 @@
 {
   "compilerOptions": {
-    "outDir": "./.modelence/",
     "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] },
+    "paths": {
+      "@/*": ["./src/*"],
+      "modelence/client": ["./src/client/lib/cloudflare/modelenceClient.ts"],
+      "@modelence/react-query": ["./src/client/lib/cloudflare/modelenceReactQuery.ts"]
+    },
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "ESNext",
@@ -27,5 +30,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["**/*.ts", "**/*.tsx", "**/*.d.ts"],
-  "exclude": ["node_modules", ".modelence"]
+  "exclude": ["node_modules", "dist"]
 }

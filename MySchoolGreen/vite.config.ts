@@ -5,9 +5,18 @@ import path from 'path';
 export default defineConfig({
   root: 'src/client',
   plugins: [react()],
+  build: {
+    outDir: '../../dist',
+    emptyOutDir: true,
+  },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': path.resolve(__dirname, './src'),
+      'modelence/client': path.resolve(__dirname, './src/client/lib/cloudflare/modelenceClient.ts'),
+      '@modelence/react-query': path.resolve(
+        __dirname,
+        './src/client/lib/cloudflare/modelenceReactQuery.ts'
+      ),
     }
   },
   server: {
