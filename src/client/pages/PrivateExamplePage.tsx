@@ -1,10 +1,7 @@
-import { useSession } from '@/client/lib/cloudflare/modelenceClient';
 import { Card, CardContent, CardHeader, CardTitle } from '@/client/components/ui/Card';
 import Page from '@/client/components/Page';
 
 export default function PrivateExamplePage() {
-  const { user } = useSession();
-
   return (
     <Page>
       <div className="max-w-3xl mx-auto py-8">
@@ -15,10 +12,10 @@ export default function PrivateExamplePage() {
           
           <CardContent className="space-y-4 text-gray-600">
             <p>
-              Welcome, <span className="font-medium text-gray-900">{user?.handle}</span>!
+              Welcome to the example page.
             </p>
             <p>
-              This is a protected page that requires authentication.
+              Authentication has been removed, so this page is now public.
             </p>
           </CardContent>
         </Card>
