@@ -23,7 +23,7 @@ const FormField = React.forwardRef<HTMLDivElement, FormFieldProps>(
           </Label>
         )}
         {children}
-        {description && !error && <p className="text-sm text-[#98a4b2]">{description}</p>}
+        {description && !error && <p className="text-sm text-slate-600">{description}</p>}
         {error && <p className="text-sm text-red-500">{error}</p>}
       </div>
     );

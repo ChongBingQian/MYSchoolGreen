@@ -180,15 +180,15 @@ export default function ImpactPage() {
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={impactHistory}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#4f5661" />
-                      <XAxis dataKey="date" stroke="#c2cad4" fontSize={12} tickMargin={10} />
-                      <YAxis stroke="#c2cad4" fontSize={12} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#d8e0ea" />
+                      <XAxis dataKey="date" stroke="#64748b" fontSize={12} tickMargin={10} />
+                      <YAxis stroke="#64748b" fontSize={12} />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: '#2c3138',
-                          border: '1px solid #4f5661',
+                          backgroundColor: '#ffffff',
+                          border: '1px solid #d8e0ea',
                           borderRadius: '8px',
-                          color: '#edf1f5',
+                          color: '#162130',
                         }}
                       />
                       <Legend />
@@ -221,15 +221,15 @@ export default function ImpactPage() {
                 <CardContent>
                   <ResponsiveContainer width="100%" height={300}>
                     <LineChart data={impactHistory}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#4f5661" />
-                      <XAxis dataKey="date" stroke="#c2cad4" fontSize={12} tickMargin={10} />
-                      <YAxis stroke="#c2cad4" fontSize={12} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#d8e0ea" />
+                      <XAxis dataKey="date" stroke="#64748b" fontSize={12} tickMargin={10} />
+                      <YAxis stroke="#64748b" fontSize={12} />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: '#2c3138',
-                          border: '1px solid #4f5661',
+                          backgroundColor: '#ffffff',
+                          border: '1px solid #d8e0ea',
                           borderRadius: '8px',
-                          color: '#edf1f5',
+                          color: '#162130',
                         }}
                       />
                       <Legend />
@@ -262,7 +262,7 @@ export default function ImpactPage() {
             >
               <CardContent className="p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Your Impact Journey</h3>
-                <p className="text-[#f2f6fb] leading-relaxed">
+                <p className="text-slate-700 leading-relaxed">
                   Over the past 30 days, your contributions have grown steadily. With{' '}
                   <strong>{currentStats.devices} active devices</strong>, you&apos;ve offset{' '}
                   <strong>{currentStats.co2Offset}kg of CO₂</strong> and earned{' '}

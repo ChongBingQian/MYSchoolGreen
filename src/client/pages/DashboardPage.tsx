@@ -304,10 +304,10 @@ export default function DashboardPage() {
                       <div
                         className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${
                           metricDelta.direction === 'up'
-                            ? 'bg-[#418228]/20 text-[#c9f1bb]'
+                            ? 'bg-[#418228]/20 text-[#2f6e1f]'
                             : metricDelta.direction === 'down'
                               ? 'bg-rose-100 text-rose-700'
-                              : 'bg-[#343941] text-[#c2cad4]'
+                              : 'bg-slate-100 text-slate-700'
                         }`}
                       >
                         {metricDelta.direction === 'up' ? (
@@ -329,19 +329,19 @@ export default function DashboardPage() {
                             <stop offset="95%" stopColor={selected.color} stopOpacity={0.05} />
                           </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="4 4" stroke="#4f5661" />
+                        <CartesianGrid strokeDasharray="4 4" stroke="#d8e0ea" />
                         <XAxis
                           dataKey="date"
-                          tick={{ fill: '#c2cad4', fontSize: 12 }}
+                          tick={{ fill: '#64748b', fontSize: 12 }}
                           tickMargin={10}
                         />
-                        <YAxis tick={{ fill: '#c2cad4', fontSize: 12 }} />
+                        <YAxis tick={{ fill: '#64748b', fontSize: 12 }} />
                         <Tooltip
                           contentStyle={{
                             borderRadius: '10px',
-                            border: '1px solid #4f5661',
-                            background: '#2c3138',
-                            color: '#edf1f5',
+                            border: '1px solid #d8e0ea',
+                            background: '#ffffff',
+                            color: '#162130',
                           }}
                           formatter={(value: ValueType | undefined) => {
                             if (value === undefined || value === null) {
@@ -415,19 +415,19 @@ export default function DashboardPage() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={320}>
                   <LineChart data={impactHistory}>
-                    <CartesianGrid strokeDasharray="4 4" stroke="#4f5661" />
+                    <CartesianGrid strokeDasharray="4 4" stroke="#d8e0ea" />
                     <XAxis
                       dataKey="date"
-                      tick={{ fill: '#c2cad4', fontSize: 12 }}
+                      tick={{ fill: '#64748b', fontSize: 12 }}
                       tickMargin={10}
                     />
-                    <YAxis tick={{ fill: '#c2cad4', fontSize: 12 }} />
+                    <YAxis tick={{ fill: '#64748b', fontSize: 12 }} />
                     <Tooltip
                       contentStyle={{
                         borderRadius: '10px',
-                        border: '1px solid #4f5661',
-                        background: '#2c3138',
-                        color: '#edf1f5',
+                        border: '1px solid #d8e0ea',
+                        background: '#ffffff',
+                        color: '#162130',
                       }}
                     />
                     <Legend />
@@ -553,7 +553,7 @@ export default function DashboardPage() {
                 <CardTitle>Narrative Summary</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-[#f2f6fb] leading-relaxed">
+                <p className="text-slate-700 leading-relaxed">
                   Your network currently sustains{' '}
                   <strong>{data.activeDevices} active sensors</strong> across{' '}
                   <strong>{data.totalSchools} schools</strong>. That translates to an estimated{' '}

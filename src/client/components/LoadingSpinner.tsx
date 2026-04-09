@@ -5,14 +5,14 @@ interface LoadingSpinnerProps {
 
 export default function LoadingSpinner({ fullScreen = false, message }: LoadingSpinnerProps) {
   const containerClasses = fullScreen
-    ? 'h-screen flex items-center justify-center bg-[#24282d]'
+    ? 'h-screen flex items-center justify-center bg-white'
     : 'flex items-center justify-center min-h-screen';
 
   return (
     <div className={containerClasses}>
       <div className="flex flex-col items-center gap-4">
-        <div className="w-8 h-8 border-4 border-[#4f5661] border-t-[#547599] rounded-full animate-spin"></div>
-        <p className="text-[#c2cad4] text-sm">{message}</p>
+        <div className="w-8 h-8 border-4 border-slate-300 border-t-[#547599] rounded-full animate-spin"></div>
+        <p className="text-slate-600 text-sm">{message}</p>
       </div>
     </div>
   );

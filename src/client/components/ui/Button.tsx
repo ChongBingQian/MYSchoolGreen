@@ -10,17 +10,17 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'default', size = 'default', asChild = false, ...props }, ref) => {
     const baseClasses =
-      'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#24282d] disabled:pointer-events-none disabled:opacity-50';
+      'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:pointer-events-none disabled:opacity-50';
 
     const variantClasses = {
       default: 'bg-[#547599] text-white shadow hover:bg-[#6487ad] active:bg-[#486785]',
       destructive: 'bg-red-600 text-white shadow-sm hover:bg-red-700 active:bg-red-800',
       outline:
-        'border border-[#4f5661] bg-[#2c3138] text-[#edf1f5] shadow-sm hover:bg-[#3b414a] hover:text-white active:bg-[#454d56]',
+        'border border-slate-300 bg-white text-slate-800 shadow-sm hover:bg-slate-100 hover:text-slate-900 active:bg-slate-200',
       secondary: 'bg-[#418228] text-white shadow-sm hover:bg-[#4a9430] active:bg-[#377022]',
-      ghost: 'text-[#c2cad4] hover:bg-[#343941] hover:text-white active:bg-[#3c434c]',
+      ghost: 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 active:bg-slate-200',
       link: 'text-[#547599] underline-offset-4 hover:underline',
-      inverse: 'bg-[#343941] text-[#edf1f5] shadow hover:bg-[#424953] active:bg-[#4b535d]',
+      inverse: 'bg-slate-800 text-white shadow hover:bg-slate-700 active:bg-slate-900',
     };
 
     const sizeClasses = {

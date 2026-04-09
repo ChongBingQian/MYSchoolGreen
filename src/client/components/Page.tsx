@@ -23,7 +23,7 @@ interface NavLink {
 
 function Header({ onMenuClick }: { onMenuClick: () => void }) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-4 border-b border-[#4f5661] bg-[#2c3138]">
+    <header className="fixed top-0 left-0 right-0 z-50 h-16 flex items-center justify-between px-4 border-b border-slate-200 bg-white/95 backdrop-blur-sm">
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" onClick={onMenuClick} className="lg:hidden">
           <Menu className="w-5 h-5" />
@@ -34,7 +34,7 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
       </div>
 
       <div className="flex items-center gap-3">
-        <span className="text-sm text-[#c2cad4]">MySchoolGreen</span>
+        <span className="text-sm text-slate-600">MySchoolGreen</span>
       </div>
     </header>
   );
@@ -80,12 +80,12 @@ function Sidebar({
         onMouseEnter={onDesktopEnter}
         onMouseLeave={onDesktopLeave}
         className={cn(
-          'fixed top-0 bottom-0 left-0 z-50 w-64 bg-[#2c3138] border-r border-[#4f5661] transform transition-transform duration-200 ease-in-out lg:top-16 lg:bottom-0 lg:translate-x-0 lg:transform-none lg:transition-[width] lg:duration-300 lg:ease-out',
+          'fixed top-0 bottom-0 left-0 z-50 w-64 bg-white border-r border-slate-200 shadow-sm transform transition-transform duration-200 ease-in-out lg:top-16 lg:bottom-0 lg:translate-x-0 lg:transform-none lg:transition-[width] lg:duration-300 lg:ease-out',
           isDesktopExpanded ? 'lg:w-64' : 'lg:w-20',
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         )}
       >
-        <div className="flex items-center justify-between p-4 border-b border-[#4f5661] lg:hidden">
+        <div className="flex items-center justify-between p-4 border-b border-slate-200 lg:hidden">
           <h2 className="text-lg font-semibold">Menu</h2>
           <Button variant="ghost" size="icon" onClick={onClose}>
             <X className="w-5 h-5" />
@@ -106,8 +106,8 @@ function Sidebar({
                   'flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors lg:px-3',
                   isDesktopExpanded ? 'lg:justify-start' : 'lg:justify-center',
                   isActive
-                    ? 'bg-[#547599]/25 text-white lg:bg-[#547599]/35'
-                    : 'text-[#c2cad4] hover:bg-[#343941] hover:text-white'
+                    ? 'bg-[#547599]/15 text-[#1f3045] lg:bg-[#547599]/20'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 )}
                 title={link.label}
               >
@@ -142,7 +142,7 @@ function PageBody({ children, className, isLoading = false }: PageProps) {
     <div className="flex flex-1 w-full min-h-0 lg:pl-20">
       <main
         className={cn(
-          'flex flex-col flex-1 p-4 space-y-4 overflow-x-hidden bg-gradient-to-br from-[#24282d] via-[#2c3138] to-[#343941]',
+          'flex flex-col flex-1 p-4 space-y-4 overflow-x-hidden bg-gradient-to-br from-white via-slate-50 to-blue-50',
           className
         )}
       >

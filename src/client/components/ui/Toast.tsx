@@ -8,24 +8,24 @@ export function Toaster() {
       toastOptions={{
         duration: 4000,
         style: {
-          background: '#2c3138',
-          color: '#edf1f5',
-          border: '1px solid #4f5661',
+          background: '#ffffff',
+          color: '#162130',
+          border: '1px solid #d8e0ea',
           borderRadius: '0.5rem',
           fontSize: '0.875rem',
           padding: '0.75rem 1rem',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.28)',
+          boxShadow: '0 10px 24px rgba(22, 33, 48, 0.12)',
         },
         success: {
           iconTheme: {
             primary: '#418228',
-            secondary: '#edf1f5',
+            secondary: '#ffffff',
           },
         },
         error: {
           iconTheme: {
             primary: '#ef4444',
-            secondary: '#edf1f5',
+            secondary: '#ffffff',
           },
         },
       }}

@@ -7,15 +7,15 @@
 		--brand-primary: #547599;
 		--brand-secondary: #418228;
 		--brand-tertiary: #69503b;
-		--brand-neutral: #5e6167;
+		--brand-neutral: #64748b;
 
-		--bg-canvas: #24282d;
-		--bg-surface: #2c3138;
-		--bg-surface-soft: #343941;
-		--border-strong: #4f5661;
-		--text-strong: #edf1f5;
-		--text-muted: #c2cad4;
-		--text-soft: #98a4b2;
+		--bg-canvas: #f5f7fb;
+		--bg-surface: #ffffff;
+		--bg-surface-soft: #eef2f7;
+		--border-strong: #d8e0ea;
+		--text-strong: #162130;
+		--text-muted: #41536a;
+		--text-soft: #6d7f94;
 	}
 
 	html,
@@ -27,10 +27,10 @@
 	body {
 		font-family: 'Space Grotesk', 'Avenir Next', 'Segoe UI', sans-serif;
 		background:
-			radial-gradient(circle at 12% 16%, rgba(84, 117, 153, 0.26) 0%, transparent 36%),
-			radial-gradient(circle at 88% 8%, rgba(65, 130, 40, 0.22) 0%, transparent 40%),
-			radial-gradient(circle at 76% 88%, rgba(105, 80, 59, 0.22) 0%, transparent 34%),
-			linear-gradient(145deg, #20242a 0%, var(--bg-canvas) 50%, #1d2126 100%);
+			radial-gradient(circle at 10% 14%, rgba(84, 117, 153, 0.14) 0%, transparent 34%),
+			radial-gradient(circle at 86% 8%, rgba(65, 130, 40, 0.12) 0%, transparent 38%),
+			radial-gradient(circle at 78% 90%, rgba(105, 80, 59, 0.1) 0%, transparent 30%),
+			linear-gradient(155deg, #f9fbff 0%, var(--bg-canvas) 52%, #f3f7fc 100%);
 		color: var(--text-strong);
 		text-rendering: optimizeLegibility;
 	}
@@ -51,7 +51,7 @@
 }
 
 @layer utilities {
-	/* Global utility remapping to keep existing class usage while applying the new palette. */
+	/* Global utility remapping for a white-base theme while preserving existing classes. */
 	.text-gray-900,
 	.text-slate-900,
 	.text-indigo-900,
@@ -85,17 +85,20 @@
 	}
 
 	.bg-white,
-	.bg-gray-50,
 	.bg-slate-50,
+	.bg-gray-50,
 	.bg-gray-100,
-	.bg-slate-100,
+	.bg-slate-100 {
+		background-color: var(--bg-surface) !important;
+	}
+
 	.bg-blue-50,
 	.bg-indigo-50,
 	.bg-cyan-50,
 	.bg-green-50,
 	.bg-emerald-50,
 	.bg-amber-50 {
-		background-color: var(--bg-surface) !important;
+		background-color: var(--bg-surface-soft) !important;
 	}
 
 	.bg-blue-100,
@@ -106,7 +109,7 @@
 	.bg-amber-100,
 	.bg-slate-900\/10,
 	.bg-slate-900\/20 {
-		background-color: var(--bg-surface-soft) !important;
+		background-color: #dce5f1 !important;
 	}
 
 	.border-gray-100,
@@ -165,25 +168,25 @@
 	.from-slate-100\/70,
 	.from-sky-50,
 	.from-emerald-50 {
-		--tw-gradient-from: var(--bg-surface) var(--tw-gradient-from-position) !important;
-		--tw-gradient-to: rgba(44, 49, 56, 0) var(--tw-gradient-to-position) !important;
+		--tw-gradient-from: #ffffff var(--tw-gradient-from-position) !important;
+		--tw-gradient-to: rgba(255, 255, 255, 0) var(--tw-gradient-to-position) !important;
 	}
 
 	.via-white {
-		--tw-gradient-stops: var(--tw-gradient-from), var(--bg-surface-soft) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+		--tw-gradient-stops: var(--tw-gradient-from), #f2f6fb var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
 	}
 
 	.to-green-50,
 	.to-cyan-50,
 	.to-slate-100\/70 {
-		--tw-gradient-to: var(--bg-surface-soft) var(--tw-gradient-to-position) !important;
+		--tw-gradient-to: #eef4fb var(--tw-gradient-to-position) !important;
 	}
 
 	.hover\:bg-gray-50:hover,
 	.hover\:bg-slate-100:hover,
 	.hover\:bg-cyan-50:hover,
 	.hover\:bg-emerald-50:hover {
-		background-color: #3b414a !important;
+		background-color: #ecf2f9 !important;
 	}
 
 	.divide-gray-100 > :not([hidden]) ~ :not([hidden]) {
@@ -194,6 +197,67 @@
 	.focus-visible\:ring-blue-500:focus-visible,
 	.focus-visible\:ring-gray-500:focus-visible {
 		--tw-ring-color: rgba(84, 117, 153, 0.75) !important;
+	}
+
+	/* Compatibility layer for existing dark arbitrary Tailwind classes used across pages. */
+	.bg-\[\#24282d\],
+	.bg-\[\#2c3138\] {
+		background-color: #ffffff !important;
+	}
+
+	.bg-\[\#343941\] {
+		background-color: #e9eff7 !important;
+	}
+
+	.border-\[\#4f5661\] {
+		border-color: #d8e0ea !important;
+	}
+
+	.text-\[\#edf1f5\] {
+		color: #162130 !important;
+	}
+
+	.text-\[\#c2cad4\],
+	.text-\[\#98a4b2\],
+	.text-\[\#d5dde7\],
+	.text-\[\#f2f6fb\] {
+		color: #41536a !important;
+	}
+
+	.text-\[\#caefbf\],
+	.text-\[\#c9f1bb\] {
+		color: #2f6e1f !important;
+	}
+
+	.text-\[\#e3d2c1\] {
+		color: #7a5a3f !important;
+	}
+
+	.from-\[\#24282d\] {
+		--tw-gradient-from: #f8fbff var(--tw-gradient-from-position) !important;
+		--tw-gradient-to: rgba(248, 251, 255, 0) var(--tw-gradient-to-position) !important;
+	}
+
+	.via-\[\#2c3138\] {
+		--tw-gradient-stops: var(--tw-gradient-from), #f2f6fc var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+	}
+
+	.to-\[\#343941\] {
+		--tw-gradient-to: #ecf2f9 var(--tw-gradient-to-position) !important;
+	}
+
+	.hover\:bg-\[\#343941\]:hover,
+	.hover\:bg-\[\#3b414a\]:hover,
+	.hover\:bg-\[\#424953\]:hover,
+	.hover\:bg-\[\#454d56\]:hover,
+	.active\:bg-\[\#3c434c\]:active,
+	.active\:bg-\[\#4b535d\]:active {
+		background-color: #e3ebf5 !important;
+	}
+
+	.focus-visible\:ring-offset-\[\#24282d\]:focus-visible,
+	.peer-focus-visible\:ring-offset-\[\#24282d\].peer:focus-visible ~ * {
+		--tw-ring-offset-color: #f5f7fb !important;
 	}
 
 	/* Roundedness 2: moderate curvature across common utility sizes. */
@@ -236,8 +300,8 @@
 
 	.story-grid-bg {
 		background-image:
-			linear-gradient(rgba(169, 182, 198, 0.14) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(169, 182, 198, 0.14) 1px, transparent 1px);
+			linear-gradient(rgba(119, 138, 161, 0.16) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(119, 138, 161, 0.16) 1px, transparent 1px);
 		background-size: 28px 28px;
 		background-position: 0 0;
 	}

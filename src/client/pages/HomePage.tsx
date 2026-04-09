@@ -137,7 +137,7 @@ export default function HomePage() {
                 </Link>
                 <Link
                   to="/impact"
-                  className="inline-flex items-center gap-2 rounded-xl bg-white text-[#ffffff] border border-slate-200 px-4 py-2.5 text-sm font-semibold hover:bg-slate-100 transition-colors"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white text-slate-900 border border-slate-200 px-4 py-2.5 text-sm font-semibold hover:bg-slate-100 transition-colors"
                 >
                   View Impact Story
                   <TrendingUp className="w-4 h-4" />
@@ -208,7 +208,7 @@ export default function HomePage() {
                   <BarChart3 className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Dashboard</h3>
-                <p className="text-xs text-[#d5dde7]">Explore analytics</p>
+                <p className="text-xs text-slate-600">Explore analytics</p>
               </CardContent>
             </Card>
           </Link>
@@ -220,7 +220,7 @@ export default function HomePage() {
                   <TrendingUp className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Impact</h3>
-                <p className="text-xs text-[#d5dde7]">Read the journey</p>
+                <p className="text-xs text-slate-600">Read the journey</p>
               </CardContent>
             </Card>
           </Link>
@@ -232,7 +232,7 @@ export default function HomePage() {
                   <Smartphone className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Devices</h3>
-                <p className="text-xs text-[#d5dde7]">Manage assets</p>
+                <p className="text-xs text-slate-600">Manage assets</p>
               </CardContent>
             </Card>
           </Link>
@@ -244,7 +244,7 @@ export default function HomePage() {
                   <Leaf className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Simulator</h3>
-                <p className="text-xs text-[#d5dde7]">Generate signals</p>
+                <p className="text-xs text-slate-600">Generate signals</p>
               </CardContent>
             </Card>
           </Link>
@@ -256,7 +256,7 @@ export default function HomePage() {
                   <CheckSquare className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Todos</h3>
-                <p className="text-xs text-[#d5dde7]">Coordinate actions</p>
+                <p className="text-xs text-slate-600">Coordinate actions</p>
               </CardContent>
             </Card>
           </Link>
