@@ -4,7 +4,6 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useSession } from '@/client/lib/cloudflare/modelenceClient';
 import LoadingSpinner from '@/client/components/LoadingSpinner';
 import { Button } from '@/client/components/ui/Button';
 import { cn } from '@/client/lib/utils';
@@ -23,8 +22,6 @@ interface NavLink {
 }
 
 function Header({ onMenuClick }: { onMenuClick: () => void }) {
-  const { user } = useSession();
-
   return (
     <header className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white">
       <div className="flex items-center gap-2">
@@ -36,38 +33,26 @@ function Header({ onMenuClick }: { onMenuClick: () => void }) {
         </Link>
       </div>
 
-      {user ? (
-        <div className="flex items-center gap-3">
-          <span className="text-sm text-gray-600">{user.handle}</span>
-          <Link to="/logout">
-            <Button variant="outline">Logout</Button>
-          </Link>
-        </div>
-      ) : (
-        <Link to="/login">
-          <Button variant="outline">Sign in</Button>
-        </Link>
-      )}
+      <div className="flex items-center gap-3">
+        <span className="text-sm text-gray-600">MySchoolGreen</span>
+      </div>
     </header>
   );
 }
 
 function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const { user } = useSession();
   const location = useLocation();
 
-  const navLinks: NavLink[] = user
-    ? [
-        { to: '/', label: 'Home', icon: Home },
-        { to: '/dashboard', label: 'Dashboard', icon: BarChart3 },
-        { to: '/impact', label: 'Impact Summary', icon: TrendingUp },
-        { to: '/devices', label: 'Devices', icon: Smartphone },
-        { to: '/simulator', label: 'Sensor Simulator', icon: Leaf },
-        { to: '/todos', label: 'Todo List', icon: CheckSquare },
-      ]
-    : [];
+  const navLinks: NavLink[] = [
+    { to: '/', label: 'Home', icon: Home },
+    { to: '/dashboard', label: 'Dashboard', icon: BarChart3 },
+    { to: '/impact', label: 'Impact Summary', icon: TrendingUp },
+    { to: '/devices', label: 'Devices', icon: Smartphone },
+    { to: '/simulator', label: 'Sensor Simulator', icon: Leaf },
+    { to: '/todos', label: 'Todo List', icon: CheckSquare },
+  ];
 
-  if (!user || navLinks.length === 0) {
+  if (navLinks.length === 0) {
     return null;
   }
 
@@ -127,7 +112,12 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
 function PageBody({ children, className, isLoading = false }: PageProps) {
   return (
     <div className="flex flex-1 w-full min-h-0">
-      <main className={cn('flex flex-col flex-1 p-4 space-y-4 overflow-x-hidden', className)}>
+      <main
+        className={cn(
+          'flex flex-col flex-1 p-4 space-y-4 overflow-x-hidden bg-gradient-to-br from-emerald-50 via-white to-green-50',
+          className
+        )}
+      >
         {isLoading ? (
           <div className="flex items-center justify-center w-full h-full">
             <LoadingSpinner />
@@ -142,13 +132,12 @@ function PageBody({ children, className, isLoading = false }: PageProps) {
 
 export default function Page({ children, className, isLoading = false }: PageProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { user } = useSession();
 
   return (
     <PageWrapper>
       <Header onMenuClick={() => setSidebarOpen(true)} />
       <div className="flex flex-1 min-h-0">
-        {user && <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />}
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         <PageBody className={className} isLoading={isLoading}>
           {children}
         </PageBody>

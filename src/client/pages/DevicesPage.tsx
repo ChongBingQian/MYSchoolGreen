@@ -177,7 +177,7 @@ export default function DevicesPage() {
   const isLoading = devicesLoading || schoolsLoading;
 
   return (
-    <Page className="bg-gray-50">
+    <Page>
       <div className="max-w-6xl mx-auto py-8 px-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-start mb-8">
           <div className="min-w-0">

@@ -1,5 +1,8 @@
 export interface Env {
-  // Add bindings here (KV, D1, R2, etc.) as your API grows.
+  // Static asset binding configured in wrangler.worker.toml.
+  ASSETS?: {
+    fetch(request: Request): Promise<Response>;
+  };
 }
 
 function json(data: unknown, status = 200): Response {
@@ -13,7 +16,7 @@ function json(data: unknown, status = 200): Response {
 }
 
 export default {
-  async fetch(request: Request, _env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
 
     if (url.pathname === '/api/health') {
@@ -24,12 +27,28 @@ export default {
       return json({ now: new Date().toISOString() });
     }
 
-    return json(
-      {
-        ok: false,
-        message: 'Not found',
+    // Keep API paths strict: unknown API routes should still return 404 JSON.
+    if (url.pathname.startsWith('/api/')) {
+      return json(
+        {
+          ok: false,
+          message: 'Not found',
+        },
+        404
+      );
+    }
+
+    // Serve frontend SPA from Worker static assets for all non-API routes.
+    if (env.ASSETS) {
+      return env.ASSETS.fetch(request);
+    }
+
+    return new Response('Frontend assets are not configured. Run build and redeploy worker.', {
+      status: 503,
+      headers: {
+        'content-type': 'text/plain; charset=utf-8',
+        'cache-control': 'no-store',
       },
-      404
-    );
+    });
   },
 };

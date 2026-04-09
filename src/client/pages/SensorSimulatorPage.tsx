@@ -1,10 +1,20 @@
 import { useState, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { modelenceQuery, modelenceMutation, createQueryKey } from '@/client/lib/cloudflare/modelenceReactQuery';
+import {
+  modelenceQuery,
+  modelenceMutation,
+  createQueryKey,
+} from '@/client/lib/cloudflare/modelenceReactQuery';
 import { Activity, Zap, Thermometer, Droplets, Wind, Leaf } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Page from '@/client/components/Page';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/client/components/ui/Card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from '@/client/components/ui/Card';
 import { Button } from '@/client/components/ui/Button';
 import { Input } from '@/client/components/ui/Input';
 import { Label } from '@/client/components/ui/Label';
@@ -50,7 +60,9 @@ export default function SensorSimulatorPage() {
     ...modelenceMutation('regenerate.recordReading'),
     onSuccess: () => {
       toast.success('Reading recorded!');
-      queryClient.invalidateQueries({ queryKey: createQueryKey('regenerate.getDeviceReadings', { deviceId: selectedDevice }) });
+      queryClient.invalidateQueries({
+        queryKey: createQueryKey('regenerate.getDeviceReadings', { deviceId: selectedDevice }),
+      });
       queryClient.invalidateQueries({ queryKey: createQueryKey('regenerate.getDashboardStats') });
       queryClient.invalidateQueries({ queryKey: createQueryKey('regenerate.getDevices') });
     },
@@ -59,37 +71,41 @@ export default function SensorSimulatorPage() {
     },
   });
 
-  const handleRecordReading = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    recordReading({
-      deviceId: selectedDevice,
-      sensorType: formData.get('sensorType') as string,
-      value: parseFloat(formData.get('value') as string),
-      unit: formData.get('unit') as string,
-    });
-  }, [selectedDevice, recordReading]);
+  const handleRecordReading = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      recordReading({
+        deviceId: selectedDevice,
+        sensorType: formData.get('sensorType') as string,
+        value: parseFloat(formData.get('value') as string),
+        unit: formData.get('unit') as string,
+      });
+    },
+    [selectedDevice, recordReading]
+  );
 
-  const handleSimulateRandom = useCallback((preset: typeof sensorPresets[0]) => {
-    const value = Math.round((preset.min + Math.random() * (preset.max - preset.min)) * 10) / 10;
-    recordReading({
-      deviceId: selectedDevice,
-      sensorType: preset.type,
-      value,
-      unit: preset.unit,
-    });
-  }, [selectedDevice, recordReading]);
+  const handleSimulateRandom = useCallback(
+    (preset: (typeof sensorPresets)[0]) => {
+      const value = Math.round((preset.min + Math.random() * (preset.max - preset.min)) * 10) / 10;
+      recordReading({
+        deviceId: selectedDevice,
+        sensorType: preset.type,
+        value,
+        unit: preset.unit,
+      });
+    },
+    [selectedDevice, recordReading]
+  );
 
-  const activeDevices = devices?.filter(d => d.status === 'active') || [];
+  const activeDevices = devices?.filter((d) => d.status === 'active') || [];
 
   return (
-    <Page className="bg-gray-50">
+    <Page>
       <div className="max-w-6xl mx-auto py-8 px-4">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Sensor Simulator</h1>
-          <p className="text-gray-600 mt-2">
-            Simulate IoT sensor readings from repurposed devices
-          </p>
+          <p className="text-gray-600 mt-2">Simulate IoT sensor readings from repurposed devices</p>
         </div>
 
         {devicesLoading ? (
@@ -102,7 +118,7 @@ export default function SensorSimulatorPage() {
               <p className="text-gray-500 mt-2">
                 Register and activate devices first to simulate sensor readings.
               </p>
-              <Button className="mt-4" onClick={() => window.location.href = '/devices'}>
+              <Button className="mt-4" onClick={() => (window.location.href = '/devices')}>
                 Go to Device Management
               </Button>
             </CardContent>
@@ -198,12 +214,7 @@ export default function SensorSimulatorPage() {
                           </div>
                           <div>
                             <Label htmlFor="unit">Unit</Label>
-                            <Input
-                              id="unit"
-                              name="unit"
-                              placeholder="e.g., °C, %, AQI"
-                              required
-                            />
+                            <Input id="unit" name="unit" placeholder="e.g., °C, %, AQI" required />
                           </div>
                         </div>
                         <Button type="submit" className="w-full" disabled={isRecording}>
@@ -222,7 +233,9 @@ export default function SensorSimulatorPage() {
               <CardHeader>
                 <CardTitle>Recent Readings</CardTitle>
                 <CardDescription>
-                  {selectedDevice ? 'Latest readings from selected device' : 'Select a device to view readings'}
+                  {selectedDevice
+                    ? 'Latest readings from selected device'
+                    : 'Select a device to view readings'}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -239,7 +252,7 @@ export default function SensorSimulatorPage() {
                 ) : (
                   <div className="space-y-2 max-h-[500px] overflow-y-auto">
                     {readings.map((reading) => {
-                      const preset = sensorPresets.find(p => p.type === reading.sensorType);
+                      const preset = sensorPresets.find((p) => p.type === reading.sensorType);
                       const Icon = preset?.icon || Activity;
                       return (
                         <div

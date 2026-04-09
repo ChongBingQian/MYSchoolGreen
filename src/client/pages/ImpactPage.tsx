@@ -99,15 +99,15 @@ export default function ImpactPage() {
           <>
             {/* Current Stats Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-              <Card className="border-emerald-200 bg-emerald-50">
+              <Card className="border-indigo-200 bg-indigo-50">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
-                      <Smartphone className="w-5 h-5 text-emerald-600" />
+                    <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
+                      <Smartphone className="w-5 h-5 text-indigo-600" />
                     </div>
                     <div>
-                      <p className="text-2xl font-bold text-emerald-900">{currentStats.devices}</p>
-                      <p className="text-xs text-emerald-700">Active Devices</p>
+                      <p className="text-2xl font-bold text-indigo-900">{currentStats.devices}</p>
+                      <p className="text-xs text-indigo-700">Active Devices</p>
                     </div>
                   </div>
                 </CardContent>
@@ -182,9 +182,9 @@ export default function ImpactPage() {
                       <Line
                         type="monotone"
                         dataKey="devices"
-                        stroke="#10b981"
+                        stroke="#4f46e5"
                         strokeWidth={2}
-                        dot={{ fill: '#10b981', r: 3 }}
+                        dot={{ fill: '#4f46e5', r: 3 }}
                         name="Active Devices"
                       />
                       <Line
