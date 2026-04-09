@@ -182,18 +182,18 @@ export default function HomePage() {
               >
                 <CardContent className="p-5">
                   <div className="flex items-start justify-between mb-4">
-                    <div className="text-sm font-medium text-[#edf1f5]">{item.title}</div>
+                    <div className="text-sm font-medium text-[#2f3740]">{item.title}</div>
                     <div
                       className={`h-10 w-10 rounded-xl bg-gradient-to-br ${item.tone} flex items-center justify-center impact-glow`}
                     >
                       <Icon className="w-5 h-5 text-white" />
                     </div>
                   </div>
-                  <div className="text-3xl font-bold text-slate-900">{item.value}</div>
-                  <p className="mt-1 text-xs font-semibold text-[#e7f3e3]">
+                  <div className="text-3xl font-bold text-[#1f262d]">{item.value}</div>
+                  <p className="mt-1 text-xs font-semibold text-[#2f5e1f]">
                     {item.delta} this week
                   </p>
-                  <p className="mt-3 text-sm text-[#e4ebf3] leading-relaxed">{item.description}</p>
+                  <p className="mt-3 text-sm text-[#3f4a55] leading-relaxed">{item.description}</p>
                 </CardContent>
               </Card>
             );
@@ -204,8 +204,8 @@ export default function HomePage() {
           <Link to="/dashboard" className="group">
             <Card className="border-2 border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 h-full">
               <CardContent className="p-4 text-center">
-                <div className="w-12 h-12 bg-slate-900/10 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-slate-900/20 transition-colors">
-                  <BarChart3 className="w-6 h-6 text-[#24282d]" />
+                <div className="w-12 h-12 bg-[#547599] rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-[#6387af] transition-colors">
+                  <BarChart3 className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Dashboard</h3>
                 <p className="text-xs text-[#d5dde7]">Explore analytics</p>
@@ -216,8 +216,8 @@ export default function HomePage() {
           <Link to="/impact" className="group">
             <Card className="border-2 border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 h-full">
               <CardContent className="p-4 text-center">
-                <div className="w-12 h-12 bg-slate-900/10 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-slate-900/20 transition-colors">
-                  <TrendingUp className="w-6 h-6 text-[#24282d]" />
+                <div className="w-12 h-12 bg-[#547599] rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-[#6387af] transition-colors">
+                  <TrendingUp className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Impact</h3>
                 <p className="text-xs text-[#d5dde7]">Read the journey</p>
@@ -228,8 +228,8 @@ export default function HomePage() {
           <Link to="/devices" className="group">
             <Card className="border-2 border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 h-full">
               <CardContent className="p-4 text-center">
-                <div className="w-12 h-12 bg-slate-900/10 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-slate-900/20 transition-colors">
-                  <Smartphone className="w-6 h-6 text-[#24282d]" />
+                <div className="w-12 h-12 bg-[#547599] rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-[#6387af] transition-colors">
+                  <Smartphone className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Devices</h3>
                 <p className="text-xs text-[#d5dde7]">Manage assets</p>
@@ -240,8 +240,8 @@ export default function HomePage() {
           <Link to="/simulator" className="group">
             <Card className="border-2 border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 h-full">
               <CardContent className="p-4 text-center">
-                <div className="w-12 h-12 bg-slate-900/10 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-slate-900/20 transition-colors">
-                  <Leaf className="w-6 h-6 text-[#24282d]" />
+                <div className="w-12 h-12 bg-[#547599] rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-[#6387af] transition-colors">
+                  <Leaf className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Simulator</h3>
                 <p className="text-xs text-[#d5dde7]">Generate signals</p>
@@ -252,8 +252,8 @@ export default function HomePage() {
           <Link to="/todos" className="group">
             <Card className="border-2 border-slate-200 hover:shadow-lg transition-all duration-200 hover:-translate-y-1 h-full">
               <CardContent className="p-4 text-center">
-                <div className="w-12 h-12 bg-slate-900/10 rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-slate-900/20 transition-colors">
-                  <CheckSquare className="w-6 h-6 text-[#24282d]" />
+                <div className="w-12 h-12 bg-[#547599] rounded-xl flex items-center justify-center mx-auto mb-2 group-hover:bg-[#6387af] transition-colors">
+                  <CheckSquare className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-1">Todos</h3>
                 <p className="text-xs text-[#d5dde7]">Coordinate actions</p>
