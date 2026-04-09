@@ -105,7 +105,7 @@ export default function HomePage() {
   ];
 
   return (
-    <Page className="bg-slate-50 story-grid-bg">
+    <Page>
       <div className="max-w-7xl mx-auto px-4 py-6 md:py-10 space-y-6 md:space-y-8">
         <section className="relative overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-white via-sky-50 to-emerald-50 p-6 md:p-10 shadow-sm rise-in">
           <div className="absolute -top-16 -right-16 h-56 w-56 rounded-full bg-emerald-300/20 blur-3xl" />

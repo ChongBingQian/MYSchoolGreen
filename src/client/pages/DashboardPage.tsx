@@ -211,7 +211,7 @@ export default function DashboardPage() {
   }, [data?.recentReadings]);
 
   return (
-    <Page className="bg-slate-50 story-grid-bg">
+    <Page>
       <div className="max-w-7xl mx-auto py-6 px-4 md:py-8 space-y-6">
         <div className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-slate-900">

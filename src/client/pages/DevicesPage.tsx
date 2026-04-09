@@ -1,6 +1,10 @@
 import { useState, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { modelenceQuery, modelenceMutation, createQueryKey } from '@/client/lib/cloudflare/modelenceReactQuery';
+import {
+  modelenceQuery,
+  modelenceMutation,
+  createQueryKey,
+} from '@/client/lib/cloudflare/modelenceReactQuery';
 import { Smartphone, Tablet, Cpu, Plus, MapPin, Activity, Trash2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Page from '@/client/components/Page';
@@ -116,49 +120,64 @@ export default function DevicesPage() {
     },
   });
 
-  const handleAddDevice = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const sensorTypesStr = formData.get('sensorTypes') as string;
+  const handleAddDevice = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      const sensorTypesStr = formData.get('sensorTypes') as string;
 
-    registerDevice({
-      name: formData.get('name') as string,
-      deviceType: formData.get('deviceType') as string,
-      location: formData.get('location') as string,
-      sensorTypes: sensorTypesStr.split(',').map(s => s.trim()).filter(Boolean),
-      schoolId: formData.get('schoolId') as string,
-    });
-  }, [registerDevice]);
+      registerDevice({
+        name: formData.get('name') as string,
+        deviceType: formData.get('deviceType') as string,
+        location: formData.get('location') as string,
+        sensorTypes: sensorTypesStr
+          .split(',')
+          .map((s) => s.trim())
+          .filter(Boolean),
+        schoolId: formData.get('schoolId') as string,
+      });
+    },
+    [registerDevice]
+  );
 
-  const handleAddSchool = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    createSchool({
-      name: formData.get('name') as string,
-      city: formData.get('city') as string,
-    });
-  }, [createSchool]);
+  const handleAddSchool = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      createSchool({
+        name: formData.get('name') as string,
+        city: formData.get('city') as string,
+      });
+    },
+    [createSchool]
+  );
 
-  const handleRemoveDevice = useCallback((deviceId: string) => {
-    if (!window.confirm('Are you sure you want to remove this device?')) {
-      return;
-    }
+  const handleRemoveDevice = useCallback(
+    (deviceId: string) => {
+      if (!window.confirm('Are you sure you want to remove this device?')) {
+        return;
+      }
 
-    removeDevice({ deviceId });
-  }, [removeDevice]);
+      removeDevice({ deviceId });
+    },
+    [removeDevice]
+  );
 
-  const handleRemoveSchool = useCallback((schoolId: string) => {
-    if (!window.confirm('Are you sure you want to remove this school?')) {
-      return;
-    }
+  const handleRemoveSchool = useCallback(
+    (schoolId: string) => {
+      if (!window.confirm('Are you sure you want to remove this school?')) {
+        return;
+      }
 
-    removeSchool({ schoolId });
-  }, [removeSchool]);
+      removeSchool({ schoolId });
+    },
+    [removeSchool]
+  );
 
   const isLoading = devicesLoading || schoolsLoading;
 
   return (
-    <Page className="bg-gray-50">
+    <Page>
       <div className="max-w-6xl mx-auto py-8 px-4">
         <div className="flex justify-between items-start mb-8">
           <div>
@@ -198,12 +217,7 @@ export default function DevicesPage() {
                 </div>
                 <div>
                   <Label htmlFor="city">City</Label>
-                  <Input
-                    id="city"
-                    name="city"
-                    placeholder="e.g., Portland"
-                    required
-                  />
+                  <Input id="city" name="city" placeholder="e.g., Portland" required />
                 </div>
                 <div className="flex gap-2">
                   <Button type="submit" disabled={isCreatingSchool}>
@@ -345,7 +359,9 @@ export default function DevicesPage() {
                             </div>
                           </div>
                           <div className="text-right">
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(device.status)}`}>
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(device.status)}`}
+                            >
                               {device.status}
                             </span>
                             {device.lastReadingAt && (
@@ -381,16 +397,11 @@ export default function DevicesPage() {
                 </CardHeader>
                 <CardContent>
                   {!schools || schools.length === 0 ? (
-                    <p className="text-gray-500 text-center py-8">
-                      No schools registered yet.
-                    </p>
+                    <p className="text-gray-500 text-center py-8">No schools registered yet.</p>
                   ) : (
                     <div className="space-y-3">
                       {schools.map((school) => (
-                        <div
-                          key={school._id}
-                          className="p-3 border rounded-lg"
-                        >
+                        <div key={school._id} className="p-3 border rounded-lg">
                           <h4 className="font-medium text-gray-900">{school.name}</h4>
                           <p className="text-sm text-gray-500">{school.city}</p>
                           <p className="text-sm font-semibold text-amber-600 mt-1">

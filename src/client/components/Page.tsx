@@ -112,7 +112,12 @@ function PageWrapper({ children }: { children: React.ReactNode }) {
 function PageBody({ children, className, isLoading = false }: PageProps) {
   return (
     <div className="flex flex-1 w-full min-h-0">
-      <main className={cn('flex flex-col flex-1 p-4 space-y-4 overflow-x-hidden', className)}>
+      <main
+        className={cn(
+          'flex flex-col flex-1 p-4 space-y-4 overflow-x-hidden bg-gradient-to-br from-emerald-50 via-white to-green-50',
+          className
+        )}
+      >
         {isLoading ? (
           <div className="flex items-center justify-center w-full h-full">
             <LoadingSpinner />
