@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -16,7 +16,7 @@ import { FormField } from '@/client/components/ui/FormField';
 import Page from '@/client/components/Page';
 import LoadingSpinner from '@/client/components/LoadingSpinner';
 import { toast } from 'react-hot-toast';
-import { Check, Trash2, Plus } from 'lucide-react';
+import { Check, Trash2, Plus, Sparkles } from 'lucide-react';
 import { cn } from '@/client/lib/utils';
 
 // Types
@@ -26,6 +26,41 @@ type Todo = {
   description: string;
   completed: boolean;
   createdAt: Date;
+};
+
+type School = {
+  _id: string;
+  name: string;
+  city: string;
+  totalCredits: number;
+  createdAt: string;
+};
+
+type Device = {
+  _id: string;
+  name: string;
+  deviceType: string;
+  location: string;
+  sensorTypes: string[];
+  status: string;
+  schoolId: string;
+  registeredAt: string;
+  lastReadingAt?: string;
+};
+
+type DashboardStats = {
+  totalDevices: number;
+  activeDevices: number;
+  totalSchools: number;
+  totalCredits: number;
+  co2OffsetKg: number;
+};
+
+type TodoSuggestion = {
+  title: string;
+  description: string;
+  reason: string;
+  priority: 'high' | 'medium' | 'low';
 };
 
 // Form validation schema
@@ -47,9 +82,151 @@ export default function TodoPage() {
           Todo List
         </h1>
         <TodoForm />
+        <TodoSuggestions />
         <TodoList />
       </div>
     </Page>
+  );
+}
+
+function TodoSuggestions() {
+  const queryClient = useQueryClient();
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [suggestions, setSuggestions] = useState<TodoSuggestion[]>([]);
+
+  const { data: todos = [] } = useQuery({
+    ...modelenceQuery<Todo[]>('todo.getTodos'),
+  });
+
+  const { data: schools = [] } = useQuery({
+    ...modelenceQuery<School[]>('regenerate.getSchools'),
+  });
+
+  const { data: devices = [] } = useQuery({
+    ...modelenceQuery<Device[]>('regenerate.getDevices'),
+  });
+
+  const { data: dashboard } = useQuery({
+    ...modelenceQuery<DashboardStats>('regenerate.getDashboardStats'),
+  });
+
+  const { mutateAsync: createTodo, isPending: isAddingSuggestion } = useMutation({
+    ...modelenceMutation('todo.createTodo'),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: createQueryKey('todo.getTodos') });
+    },
+  });
+
+  const generateSuggestions = async () => {
+    setIsGenerating(true);
+
+    try {
+      const response = await fetch('/api/ai/todo-suggestions', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          todos,
+          schools,
+          devices,
+          dashboard,
+        }),
+      });
+
+      const payload = (await response.json()) as {
+        ok?: boolean;
+        message?: string;
+        suggestions?: TodoSuggestion[];
+      };
+
+      if (!response.ok || !payload.ok || !Array.isArray(payload.suggestions)) {
+        throw new Error(payload.message || 'Failed to generate suggestions');
+      }
+
+      setSuggestions(payload.suggestions);
+      toast.success(`Generated ${payload.suggestions.length} suggestions`);
+    } catch (error) {
+      toast.error((error as Error).message || 'Could not generate suggestions');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
+  const addSuggestion = async (suggestion: TodoSuggestion) => {
+    await createTodo({
+      title: suggestion.title,
+      description: suggestion.description,
+    });
+    toast.success('Suggestion added to your todo list');
+  };
+
+  return (
+    <Card className="mb-6 rise-in" style={{ animationDelay: '140ms' }}>
+      <CardHeader>
+        <div className="flex items-center justify-between gap-3">
+          <CardTitle className="text-lg">AI Todo Suggestions</CardTitle>
+          <Button type="button" onClick={generateSuggestions} disabled={isGenerating} size="sm">
+            <Sparkles className="w-4 h-4 mr-2" />
+            {isGenerating ? 'Generating...' : 'Suggest From App Data'}
+          </Button>
+        </div>
+      </CardHeader>
+      <CardContent>
+        {suggestions.length === 0 ? (
+          <p className="text-sm text-gray-600">
+            Generate suggestions using your current todos, schools, devices, and impact stats.
+          </p>
+        ) : (
+          <ul className="space-y-3">
+            {suggestions.map((suggestion, index) => (
+              <li
+                key={`${suggestion.title}-${index}`}
+                className="border border-gray-200 rounded-lg p-3"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-900">{suggestion.title}</p>
+                    {suggestion.description ? (
+                      <p className="text-sm text-gray-600 mt-1">{suggestion.description}</p>
+                    ) : null}
+                    {suggestion.reason ? (
+                      <p className="text-xs text-gray-500 mt-2">Why: {suggestion.reason}</p>
+                    ) : null}
+                  </div>
+                  <span
+                    className={cn(
+                      'text-xs px-2 py-1 rounded-full capitalize',
+                      suggestion.priority === 'high' && 'bg-red-100 text-red-700',
+                      suggestion.priority === 'medium' && 'bg-amber-100 text-amber-700',
+                      suggestion.priority === 'low' && 'bg-green-100 text-green-700'
+                    )}
+                  >
+                    {suggestion.priority}
+                  </span>
+                </div>
+                <div className="mt-3">
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    disabled={isAddingSuggestion}
+                    onClick={() => {
+                      addSuggestion(suggestion).catch((error: unknown) => {
+                        toast.error((error as Error).message || 'Failed to add suggestion');
+                      });
+                    }}
+                  >
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add to Todos
+                  </Button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </CardContent>
+    </Card>
   );
 }
 
@@ -135,7 +312,7 @@ function TodoList() {
   });
 
   const { mutate: toggleTodo } = useMutation({
-    ...modelenceMutation<{ completed: boolean }>('todo.toggleTodo'),
+    ...modelenceMutation<{ todoId: string }>('todo.toggleTodo'),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: createQueryKey('todo.getTodos') });
     },

@@ -58,8 +58,11 @@ npm run deploy
 
 - `GET /api/health`
 - `GET /api/time`
+- `POST /api/ai/todo-suggestions`
 
 Worker entrypoint: `src/worker/index.ts`
+
+Cloudflare AI binding is configured in `wrangler.worker.toml` under `[ai]` with `binding = "AI"`.
 
 ## Notes
 
