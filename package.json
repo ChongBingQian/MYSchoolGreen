@@ -8,7 +8,7 @@
     "build": "vite build",
     "deploy": "npm run deploy:cloudflare",
     "deploy:pages": "npm run build && cp src/client/public/_redirects.pages dist/_redirects && wrangler pages deploy dist --project-name myschoolgreen",
-    "deploy:worker": "npm run build && rm -f dist/_redirects && wrangler deploy --config wrangler.worker.toml",
+    "deploy:worker": "npm run build && node -e \"try{require('node:fs').rmSync('dist/_redirects',{force:true})}catch{}\" && wrangler deploy --config wrangler.worker.toml",
     "deploy:cloudflare": "npm run deploy:pages && npm run deploy:worker",
     "start": "vite preview",
     "lint": "eslint src/client src/types --ext .ts,.tsx",

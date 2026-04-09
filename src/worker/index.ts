@@ -3,7 +3,7 @@ export interface Env {
   ASSETS?: {
     fetch(request: Request): Promise<Response>;
   };
-  AI?: {
+  TodoAI?: {
     run(
       model: string,
       inputs: {
@@ -156,7 +156,7 @@ async function handleTodoSuggestionRequest(request: Request, env: Env): Promise<
     return json({ ok: false, message: 'Method not allowed' }, 405);
   }
 
-  if (!env.AI) {
+  if (!env.TodoAI) {
     return json(
       {
         ok: false,
@@ -175,7 +175,7 @@ async function handleTodoSuggestionRequest(request: Request, env: Env): Promise<
 
   const contextSummary = summarizeContext(body);
 
-  const aiResult = await env.AI.run('@cf/meta/llama-3.1-8b-instruct', {
+  const aiResult = await env.TodoAI.run('@cf/meta/llama-3.1-8b-instruct', {
     messages: [
       {
         role: 'system',

@@ -11,4 +11,4 @@ not_found_handling = "single-page-application"
 enabled = true
 
 [ai]
-binding = "AI"
+binding = "TodoAI"

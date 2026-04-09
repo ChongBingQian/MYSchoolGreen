@@ -62,7 +62,7 @@ npm run deploy
 
 Worker entrypoint: `src/worker/index.ts`
 
-Cloudflare AI binding is configured in `wrangler.worker.toml` under `[ai]` with `binding = "AI"`.
+Cloudflare AI binding is configured in `wrangler.worker.toml` under `[ai]` with `binding = "TodoAI"`.
 
 ## Notes
 
